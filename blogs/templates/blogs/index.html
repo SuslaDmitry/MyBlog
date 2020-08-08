@@ -15,7 +15,7 @@
       <div class="panel-heading">
         <h4>
           {{ post.date_added|date:'M d, Y H:i' }}
-          {{ post.owner }}
+           Author: {{ post.owner }}
           {% if post.owner.id == request.user.id %}
           <small>
             <a href="{% url 'blogs:edit_post' post.id %}">
