@@ -25,7 +25,7 @@ SECRET_KEY = 'mml-#!3i1z!m3y7%gx)eew4o74k_5awngdn)=$+jsja*f69a!v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.105.199.34']
+ALLOWED_HOSTS = ['35.189.91.1']
 
 
 # Application definition
