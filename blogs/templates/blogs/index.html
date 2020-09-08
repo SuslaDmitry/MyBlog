@@ -34,21 +34,29 @@
   {% empty %}
     No posts have been added yet.
   {% endfor %}
+
   <nav aria-label="...">
     <ul class="pagination">
       <li class="page-item disabled">
         <span class="page-link">Previous</span>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <span class="page-link">
-          2
-          <span class="sr-only">(current)</span>
-        </span>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+      {% for n in context.paginator.page_range %}
+        {% if context.number == n %}
+          <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">
+              {{ n }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+        {% elif n > context.number|add:-3 and n < context.number|add:3 %}
+          <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
+        {% endif %}
+      {% endfor %}
+
       <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="#">Next</a>
       </li>
     </ul>
   </nav>

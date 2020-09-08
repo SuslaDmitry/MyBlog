@@ -12,7 +12,8 @@ def posts(request):
     """Домашняя страница приложения Blog выводит список постов"""
     posts = BlogPost.objects.order_by('-date_added')
     paginator = Paginator(posts, 10)
-    context = {'posts': paginator.get_page(1)}
+    page_number = request.GET.get('page', 1)
+    context = {'posts': paginator.get_page(page_number)}
     return render(request, 'blogs/index.html', context)
 
 @login_required
