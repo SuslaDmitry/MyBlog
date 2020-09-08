@@ -43,15 +43,15 @@
 
       {% for n in page.paginator.page_range %}
         {% if page.number == n %}
-          <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
           <li class="page-item active" aria-current="page">
             <span class="page-link">
               {{ n }}
               <span class="sr-only">(current)</span>
             </span>
           </li>
-        {% elif n > page.number|add:-3 and n < page.number|add:3 %}
-          <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
         {% endif %}
       {% endfor %}
 
