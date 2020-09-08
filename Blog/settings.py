@@ -26,7 +26,12 @@ SECRET_KEY = 'mml-#!3i1z!m3y7%gx)eew4o74k_5awngdn)=$+jsja*f69a!v'
 DEBUG = True
 
 ALLOWED_HOSTS = ['35.232.162.0',
+<<<<<<< HEAD
                  'ukraineblog.tk']
+=======
+                 'ukraineblog.tk',
+                 'localhost']
+>>>>>>> c844d224622645bbce6ae334a174288e0e9a2953
 
 
 # Application definition
