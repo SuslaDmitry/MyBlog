@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['35.232.162.0',
                  'ukraineblog.tk']
 
-
 # Application definition
 
 INSTALLED_APPS = [
