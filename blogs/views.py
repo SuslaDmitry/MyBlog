@@ -14,7 +14,17 @@ def posts(request):
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
-    context = {'page': page}
+
+    if page.has_next():
+        next_url = f'?page={page.next_page_number()}'
+    else:
+        next_url = ''
+    if page.has_previous():
+        prev_url = f'?page={page.previous_page_number()}'
+    else:
+        prev_url = ''
+
+    context = {'page': page, 'next_page_url': next_url, 'prev_page_url': prev_url}
     return render(request, 'blogs/index.html', context)
 
 @login_required
