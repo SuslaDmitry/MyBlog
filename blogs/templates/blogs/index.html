@@ -41,8 +41,8 @@
         <span class="page-link">Previous</span>
       </li>
 
-      {% for n in context.paginator.page_range %}
-        {% if context.number == n %}
+      {% for n in page.paginator.page_range %}
+        {% if page.number == n %}
           <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
           <li class="page-item active" aria-current="page">
             <span class="page-link">
@@ -50,7 +50,7 @@
               <span class="sr-only">(current)</span>
             </span>
           </li>
-        {% elif n > context.number|add:-3 and n < context.number|add:3 %}
+        {% elif n > page.number|add:-3 and n < page.number|add:3 %}
           <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
         {% endif %}
       {% endfor %}

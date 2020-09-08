@@ -13,7 +13,8 @@ def posts(request):
     posts = BlogPost.objects.order_by('-date_added')
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page', 1)
-    context = {'posts': paginator.get_page(page_number)}
+    page = paginator.get_page(page_number)
+    context = {'posts': page}
     return render(request, 'blogs/index.html', context)
 
 @login_required
