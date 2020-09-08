@@ -14,7 +14,7 @@ def posts(request):
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
-    context = {'posts': page}
+    context = {'page': page}
     return render(request, 'blogs/index.html', context)
 
 @login_required
