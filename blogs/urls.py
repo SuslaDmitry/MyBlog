@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # Домашняя страница. Вывод всех публичных постов.
-    url(r'^$', views.posts, name='index'),
+    url(r'^$', views.public_posts, name='index'),
 
     # Страница для добавления новой темы
     url(r'^new_post/$', views.new_post, name='new_post'),
