@@ -10,7 +10,7 @@
     </h4>
     {% endif %}
 
-  {% for post in public_page.object_list %}
+  {% for post in owner_page.object_list %}
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>
@@ -37,22 +37,22 @@
 
   <nav aria-label="...">
     <ul class="pagination">
-      <li class="page-item {% if not prev_public_page_url %} disabled {% endif %}">
-       <a class="page-link" href="{{ prev_public_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+      <li class="page-item {% if not prev_owner_page_url %} disabled {% endif %}">
+       <a class="page-link" href="{{ prev_owner_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
       </li>
 
-      {% for n in public_page.paginator.page_range %}
-        {% if public_page.number == n %}
+      {% for n in owner_page.paginator.page_range %}
+        {% if owner_page.number == n %}
           <li class="page-item active" aria-current="page">
             <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
           </li>
-        {% elif n > public_page.number|add:-3 and n < public_page.number|add:3 %}
+        {% elif n > owner_page.number|add:-3 and n < owner_page.number|add:3 %}
           <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
         {% endif %}
       {% endfor %}
 
-      <li class="page-item {% if not next_public_page_url %} disabled {% endif %}">
-        <a class="page-link" href="{{ next_public_page_url }}">Next</a>
+      <li class="page-item {% if not next_owner_page_url %} disabled {% endif %}">
+        <a class="page-link" href="{{ next_owner_page_url }}">Next</a>
       </li>
     </ul>
   </nav>

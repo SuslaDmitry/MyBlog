@@ -8,23 +8,42 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
 
 # Create your views here.
-def posts(request):
+def owner_posts(request):
     """Домашняя страница приложения Blog выводит список постов"""
-    posts = BlogPost.objects.order_by('-date_added')
-    paginator = Paginator(posts, 10)
+    owner_posts = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
+    paginator = Paginator(owner_posts, 10)
     page_number = request.GET.get('page', 1)
-    page = paginator.get_page(page_number)
+    owner_page = paginator.get_page(page_number)
 
-    if page.has_next():
-        next_url = f'?page={page.next_page_number()}'
+    if owner_page.has_next():
+        next_url = f'?page={owner_page.next_page_number()}'
     else:
         next_url = ''
-    if page.has_previous():
-        prev_url = f'?page={page.previous_page_number()}'
+    if owner_page.has_previous():
+        prev_url = f'?page={owner_page.previous_page_number()}'
     else:
         prev_url = ''
 
-    context = {'page': page, 'next_page_url': next_url, 'prev_page_url': prev_url}
+    context = {'owner_page': owner_page, 'next_owner_page_url': next_url, 'prev_owner_page_url': prev_url}
+    return render(request, 'blogs/index.html', context)
+
+def public_posts(request):
+    """Выводит список публичных тем."""
+    public_posts = BlogPost.objects.filter(public=True).order_by('-date_added')
+    paginator = Paginator(public_posts, 10)
+    page_number = request.GET.get('page', 1)
+    public_page = paginator.get_page(page_number)
+
+    if public_page.has_next():
+        next_url = f'?page={public_page.next_page_number()}'
+    else:
+        next_url = ''
+    if public_page.has_previous():
+        prev_url = f'?page={public_page.previous_page_number()}'
+    else:
+        prev_url = ''
+
+    context = {'public_page': public_page, 'next_public_page_url': next_url, 'prev_public_page_url': prev_url}
     return render(request, 'blogs/index.html', context)
 
 @login_required

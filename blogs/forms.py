@@ -4,7 +4,7 @@ from .models import BlogPost
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'public']
         labels = {'title': '', 'text': ''}
         widgets = {'title': forms.Textarea(attrs={'cols': 80, 'rows': 1}), 'text': forms.Textarea(attrs={'cols': 80})}
 
