@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, Http404
 
 # Create your views here.
 def owner_posts(request):
-    """Домашняя страница приложения Blog выводит список постов"""
+    """Страница My posts приложения Blog выводит список постов владельца"""
     owner_posts = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
     paginator = Paginator(owner_posts, 10)
     page_number = request.GET.get('page', 1)
@@ -25,7 +25,7 @@ def owner_posts(request):
         prev_url = ''
 
     context = {'owner_page': owner_page, 'next_owner_page_url': next_url, 'prev_owner_page_url': prev_url}
-    return render(request, 'blogs/index.html', context)
+    return render(request, 'blogs/my_posts.html', context)
 
 def public_posts(request):
     """Выводит список публичных тем."""
