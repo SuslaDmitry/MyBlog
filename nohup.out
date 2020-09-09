@@ -7062,3 +7062,25 @@ Not Found: /favicon.ico
 [08/Sep/2020 18:30:28] "GET /favicon.ico HTTP/1.1" 404 2615
 [08/Sep/2020 18:33:44] "GET / HTTP/1.1" 200 5033
 [08/Sep/2020 19:00:53] "GET / HTTP/1.1" 200 5033
+Watching for file changes with StatReloader
+[09/Sep/2020 15:10:47] "GET / HTTP/1.1" 200 2944
+[09/Sep/2020 15:10:52] "GET /new_post/ HTTP/1.1" 200 3003
+[09/Sep/2020 15:11:04] "GET / HTTP/1.1" 200 2944
+[09/Sep/2020 15:11:07] "GET /edit_post/17/ HTTP/1.1" 200 3026
+[09/Sep/2020 15:11:38] "GET / HTTP/1.1" 200 2582
+Not Found: /favicon.ico
+[09/Sep/2020 15:11:39] "GET /favicon.ico HTTP/1.1" 404 2796
+[09/Sep/2020 15:11:44] "GET /users/login/ HTTP/1.1" 200 2640
+[09/Sep/2020 15:11:57] "POST /users/login/ HTTP/1.1" 302 0
+[09/Sep/2020 15:11:58] "GET / HTTP/1.1" 200 2944
+[09/Sep/2020 15:12:10] "GET /new_post/ HTTP/1.1" 200 3003
+[09/Sep/2020 15:25:57] "GET / HTTP/1.1" 200 2582
+Not Found: /hudson
+[09/Sep/2020 15:28:53] "GET /hudson HTTP/1.1" 404 2779
+Not Found: /api/jsonws/invoke
+[09/Sep/2020 15:56:45] "POST /api/jsonws/invoke HTTP/1.1" 404 2816
+[09/Sep/2020 15:58:05] "GET / HTTP/1.1" 200 2944
+Not Found: /favicon.ico
+[09/Sep/2020 15:58:06] "GET /favicon.ico HTTP/1.1" 404 2796
+[09/Sep/2020 15:58:07] "GET /edit_post/17/ HTTP/1.1" 200 3026
+[09/Sep/2020 15:58:09] "GET / HTTP/1.1" 200 2944
