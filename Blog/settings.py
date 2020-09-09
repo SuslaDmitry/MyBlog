@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Сторонние приложения
-    'bootstrap3',
+    'bootstrap4',
     # Мои приложения
     'blogs',
     'users',

@@ -1,13 +1,12 @@
 {% extends "blogs/base.html" %}
+{% load bootstrap4 %}
 {% block header %}
 <h2>Posts</h2>
 {% endblock header %}
 
 {% block content %}
     {% if request.user.id != None %}
-    <h4>
-    <a href="{% url 'blogs:new_post' %}">Add a new post</a>
-    </h4>
+      <a href="{% url 'blogs:new_post' %}" class="btn btn-dark" role="button">Add post</a>
     {% endif %}
 
   {% for post in public_page.object_list %}
@@ -17,8 +16,7 @@
           {{ post.date_added|date:'M d, Y H:i' }}
           {% if post.owner.id == request.user.id %}
           <small>
-            <a href="{% url 'blogs:edit_post' post.id %}">
-              edit post</a>
+            <a href="{% url 'blogs:new_post' %}" class="btn btn-secondary" role="button">Edit post</a>
           </small>
           {% endif %}
         </h4>
