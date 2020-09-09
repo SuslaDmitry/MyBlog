@@ -29,6 +29,11 @@
       <div class="panel-body">
         <h4>{{ post.title|linebreaks }}</h4>
         {{ post.text|linebreaks }}
+
+        {% if post.image %}
+          <img src="{{ post.image.url }}">
+        {% endif %}
+
       </div>
     </div> <!-- panel -->
   {% empty %}
