@@ -10,10 +10,11 @@
   <h4>Add a new post</h4>
 
   <form action="{% url 'blogs:new_post' %}" method='post' enctype="multipart/form-data"
-        class="form">
+        class="form-group">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
+    {{ form.media }}
       <button name="submit" class="btn btn-primary">add post</button>
     {% endbuttons %}
 

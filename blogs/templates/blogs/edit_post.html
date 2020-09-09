@@ -14,6 +14,7 @@
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
+    {{ form.media }}
       <button name="submit" class="btn btn-primary">save changes</button>
     {% endbuttons %}
   </form>
