@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
 
 # Create your views here.
+@login_required
 def owner_posts(request):
     """Страница My posts приложения Blog выводит список постов владельца"""
     owner_posts = BlogPost.objects.filter(owner=request.user).order_by('-date_added')

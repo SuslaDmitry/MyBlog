@@ -25,10 +25,12 @@
                 Blog</a>
           </div>
 
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="{% url 'blogs:owner_posts' %}">My posts</a></li>
-            </ul>
+          {% if user.is_authenticated %}
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url 'blogs:owner_posts' %}">My posts</a></li>
+              </ul>
+          {% endif %}
 
             <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
