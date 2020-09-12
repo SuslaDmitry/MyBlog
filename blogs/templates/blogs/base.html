@@ -10,15 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog</title>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
     <div class="container">
         <a class="navbar-brand" href="{% url 'blogs:index' %}">Blog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
-                aria-controls="navbar" aria-expanded="false">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -37,7 +40,7 @@
             <ul class="navbar-nav justify-content-end">
                 {% if user.is_authenticated %}
                 <span class="navbar-text active">
-                Hello, {{ user.username }}. -
+                Hello, {{ user.username }}.
               </span>
                 <li><a class="nav-link" href="{% url 'users:logout' %}">Log out</a></li>
                 <li><a class="nav-link active" href="{% url 'admin:index' %}">Admin panel</a></li>
