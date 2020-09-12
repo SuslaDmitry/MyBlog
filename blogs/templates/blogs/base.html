@@ -16,39 +16,38 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="{% url 'blogs:index' %}">Blog</a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar"
-                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
 
-        <div class="collapse navbar-collapse" id="navbarsExample07">
-            <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'blogs:owner_posts' %}">My posts</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'blogs:new_post' %}" class="btn btn-outline-light" role="button">Add Post</a>
-                </li>
-                {% endif %}
-            </ul>
-            <ul class="navbar-nav justify-content-end">
-                {% if user.is_authenticated %}
-                <span class="navbar-text active">
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blogs:owner_posts' %}">My posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'blogs:new_post' %}" class="btn btn-outline-light" role="button">Add Post</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    {% if user.is_authenticated %}
+                    <span class="navbar-text active">
                 Hello, {{ user.username }}. -
               </span>
-                <li><a class="nav-link" href="{% url 'users:logout' %}">Log out</a></li>
-                <li><a class="nav-link active" href="{% url 'admin:index' %}">Admin panel</a></li>
-                {% else %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
+                    <li><a class="nav-link" href="{% url 'users:logout' %}">Log out</a></li>
+                    <li><a class="nav-link active" href="{% url 'admin:index' %}">Admin panel</a></li>
+                    {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
     </div>
 </nav>
 
