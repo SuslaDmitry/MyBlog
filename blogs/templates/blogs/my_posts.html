@@ -9,7 +9,7 @@
 <div class="row row-cols-1 row-cols-md-2">
     {% for post in owner_page.object_list %}
     <div class="col mb-4">
-        <div class="card" style="width: 32.7rem;">
+        <div class="card" style="width: 33.7rem;">
             {% if post.image %}
             <img src="{{ post.image.url }}" class="card-img-top" alt="...">
             {% endif %}
@@ -50,6 +50,7 @@
         No posts have been added yet.
         {% endfor %}
     </div>
+</div>
 
     {% if owner_posts|length > 10 %}
     <nav aria-label="...">
