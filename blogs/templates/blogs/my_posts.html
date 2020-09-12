@@ -46,33 +46,34 @@
                 </div>
             </div>
         </div>
-        {% empty %}
-        No posts have been added yet.
-        {% endfor %}
     </div>
+    {% empty %}
+    No posts have been added yet.
+    {% endfor %}
 </div>
 
-    {% if owner_posts|length > 10 %}
-    <nav aria-label="...">
-        <ul class="pagination">
-            <li class="page-item {% if not prev_owner_page_url %} disabled {% endif %}">
-                <a class="page-link" href="{{ prev_owner_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
 
-            {% for n in owner_page.paginator.page_range %}
-            {% if owner_page.number == n %}
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
-            </li>
-            {% elif n > owner_page.number|add:-3 and n < owner_page.number|add:3 %}
-            <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
-            {% endif %}
-            {% endfor %}
+{% if owner_posts|length > 10 %}
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item {% if not prev_owner_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_owner_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
 
-            <li class="page-item {% if not next_owner_page_url %} disabled {% endif %}">
-                <a class="page-link" href="{{ next_owner_page_url }}">Next</a>
-            </li>
-        </ul>
-    </nav>
-    {% endif %}
-    {% endblock content %}
+        {% for n in owner_page.paginator.page_range %}
+        {% if owner_page.number == n %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
+        </li>
+        {% elif n > owner_page.number|add:-3 and n < owner_page.number|add:3 %}
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        <li class="page-item {% if not next_owner_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_owner_page_url }}">Next</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+{% endblock content %}
