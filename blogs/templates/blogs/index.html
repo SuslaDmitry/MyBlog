@@ -6,10 +6,10 @@
 
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-2">
+<div class="row row-cols-2 row-cols-md-2">
     {% for post in public_page.object_list %}
     <div class="col mb-4">
-        <div class="card" style="width: 33.7rem;">
+        <div class="card">
             {% if post.image %}
             <img src="{{ post.image.url }}" class="card-img-top" alt="...">
             {% endif %}
