@@ -1,62 +1,62 @@
 {% extends "blogs/base.html" %}
 {% load bootstrap4 %}
 {% block header %}
-<h2>Posts</h2>
+<h2 align="center">Public Posts</h2>
 {% endblock header %}
 
 {% block content %}
-    {% if request.user.id != None %}
-      <a href="{% url 'blogs:new_post' %}" class="btn btn-dark" role="button">Add post</a>
-    {% endif %}
 
-  {% for post in public_page.object_list %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4>
-          {{ post.date_added|date:'M d, Y H:i' }}
-          {% if post.owner.id == request.user.id %}
-          <small>
-            <a href="{% url 'blogs:new_post' %}" class="btn btn-secondary" role="button">Edit post</a>
-          </small>
-          {% endif %}
-        </h4>
-        <h4>
-        Author: {{ post.owner }}
-        </h4>
-      </div>
-      <div class="panel-body">
-        <h4>{{ post.title|linebreaks }}</h4>
-        {{ post.text|linebreaks }}
-
-        {% if post.image %}
-          <img src="{{ post.image.url }}">
-        {% endif %}
-
-      </div>
-    </div> <!-- panel -->
-  {% empty %}
+<div class="row row-cols-1 row-cols-md-2">
+    {% for post in public_page.object_list %}
+    <div class="col mb-4">
+        <div class="card" style="width: 33.7rem;">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title|linebreaks }}</h5>
+                {% if post.text|length > 50 %}
+                <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
+                {% else %}
+                <p class="text-justify">{{ post.text|linebreaks }}</p>
+                {% endif %}
+                <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
+                      role="button">Read</a></p>
+                <div class="card-footer">
+                    <h6 align="right">Author: {{ post.owner }}</h6>
+                    <small class="text-muted">{{ post.date_added|date:'M d, Y H:i' }} Create</small>
+                    <br><small class="text-muted">{{ post.date_edit|date:'M d, Y H:i' }} Edit</small></br>
+                    <small class="text-muted">{{ post.date_publication|date:'M d, Y H:i' }} Published</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
     No posts have been added yet.
-  {% endfor %}
+    {% endfor %}
+</div>
 
-  <nav aria-label="...">
+{% if owner_posts|length > 10 %}
+<nav aria-label="Search results pages">
     <ul class="pagination">
-      <li class="page-item {% if not prev_public_page_url %} disabled {% endif %}">
-       <a class="page-link" href="{{ prev_public_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
+        <li class="page-item {% if not prev_public_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_public_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
 
-      {% for n in public_page.paginator.page_range %}
+        {% for n in public_page.paginator.page_range %}
         {% if public_page.number == n %}
-          <li class="page-item active" aria-current="page">
+        <li class="page-item active" aria-current="page">
             <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
-          </li>
+        </li>
         {% elif n > public_page.number|add:-3 and n < public_page.number|add:3 %}
-          <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
         {% endif %}
-      {% endfor %}
+        {% endfor %}
 
-      <li class="page-item {% if not next_public_page_url %} disabled {% endif %}">
-        <a class="page-link" href="{{ next_public_page_url }}">Next</a>
-      </li>
+        <li class="page-item {% if not next_public_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_public_page_url }}">Next</a>
+        </li>
     </ul>
-  </nav>
+</nav>
+{% endif %}
 {% endblock content %}

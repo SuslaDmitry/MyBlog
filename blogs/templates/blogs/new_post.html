@@ -2,22 +2,22 @@
 {% load bootstrap4 %}
 
 {% block header %}
-  <h2><a href="{% url 'blogs:index' %}">Posts</a></h2>
+
 {% endblock header %}
 
 {% block content %}
 
-  <h4>Add a new post</h4>
+<h4 align="center">Add a new post</h4>
 
-  <form action="{% url 'blogs:new_post' %}" method='post' enctype="multipart/form-data"
-        class="form">
+<form action="{% url 'blogs:new_post' %}" class="form" enctype="multipart/form-data"
+      method='post'>
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
-      <button name="submit" class="btn btn-dark">Add post</button>
+    <button name="submit" class="btn btn-dark">Add post</button>
     {% endbuttons %}
 
 
-  </form>
+</form>
 
 {% endblock content %}

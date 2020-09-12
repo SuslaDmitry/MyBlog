@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,49 +10,55 @@
     <title>Blog</title>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-  </head>
-    <body>
-      <!-- Статическая навигационная панель -->
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
+</head>
+<body>
 
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-              data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-            </button>
-            <a class="navbar-brand" href="{% url 'blogs:index' %}">
-                Blog</a>
-          </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'blogs:index' %}">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-          {% if user.is_authenticated %}
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="{% url 'blogs:owner_posts' %}">My posts</a></li>
-              </ul>
-          {% endif %}
-
-            <ul class="nav navbar-nav navbar-right">
-              {% if user.is_authenticated %}
-                <li><a>Hello, {{ user.username }}.</a></li>
-                <li><a href="{% url 'users:logout' %}">log out</a></li>
-              {% else %}
-                <li><a href="{% url 'users:register' %}">register</a></li>
-                <li><a href="{% url 'users:login' %}">log in</a></li>
-              {% endif %}
+        <div class="collapse navbar-collapse" id="navbarsExample07">
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'blogs:owner_posts' %}">My posts</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'blogs:new_post' %}" class="btn btn-outline-light" role="button">Add Post</a>
+                </li>
+                {% endif %}
             </ul>
-          </div><!--/.nav-collapse -->
+            <ul class="navbar-nav justify-content-end">
+                {% if user.is_authenticated %}
+                <span class="navbar-text active">
+                Hello, {{ user.username }}. -
+              </span>
+                <li><a class="nav-link" href="{% url 'users:logout' %}">Log out</a></li>
+                <li><a class="nav-link active" href="{% url 'admin:index' %}">Admin panel</a></li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 
-        </div>
-      </nav>
-
-      <div class="container">
-        <div class="page-header">
-          {% block header %}{% endblock header %}
-        </div>
-        <div>
-          {% block content %}{% endblock content %}
-        </div>
-      </div> <!-- /container -->
-    </body>
+<div class="container">
+    <div class="page-header">
+        {% block header %}{% endblock header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</div>
+</body>
 </html>
