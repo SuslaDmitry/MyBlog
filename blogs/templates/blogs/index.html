@@ -8,7 +8,7 @@
 
 <div class="row row-cols-1 row-cols-md-2">
     {% for post in public_page.object_list %}
-    <div class="col-lg-6">
+    <p><div class="col-lg-6">
         <div class="card">
             {% if post.image %}
             <img src="{{ post.image.url }}" class="card-img-top" alt="...">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div></p>
     {% empty %}
     No posts have been added yet.
     {% endfor %}
