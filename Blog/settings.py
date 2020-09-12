@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mml-#!3i1z!m3y7%gx)eew4o74k_5awngdn)=$+jsja*f69a!v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['35.232.162.0',
                  'ukraineblog.tk']
