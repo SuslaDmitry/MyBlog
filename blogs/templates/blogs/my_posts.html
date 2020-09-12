@@ -27,25 +27,21 @@
                 </h5>
                 {% endif %}
                 <p class="text-justify">{{ post.text|linebreaks }}</p>
-                <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
-                      role="button">Read</a></p>
+                <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark"
+                      role="button">Edit</a>
+                    <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
+                       role="button">Х</a></p>
                 <div class="card-footer">
-                    <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark"
-                          role="button">Edit</a>
-                        <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
-                           role="button">Х</a></p>
-                    <div class="card-footer">
-                        <h6 align="right">Author: {{ post.owner }}</h6>
-                        <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
-                        <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
-                        {% if post.public %}
-                        <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
-                        {% endif %}
-                    </div>
+                    <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
+                    <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
+                    {% if post.public %}
+                    <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% empty %}
 No posts have been added yet.
 {% endfor %}
