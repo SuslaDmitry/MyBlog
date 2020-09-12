@@ -7,62 +7,71 @@
 {% block content %}
 
 <div class="row row-cols-1 row-cols-md-2">
-{% for post in owner_page.object_list %}
-<div class="col mb-4">
-    <div class="card">
-        {% if post.image %}
-        <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-        {% endif %}
-        <div class="card-body">
-            {% if post.public %}
-            <h5>{{ post.title|linebreaks }}<a href="{% url 'blogs:privat_public' post.id %}"
-                                              class="badge badge-success">Public</a></h5>
-            {% else %}
-            <h5>
-                {{ post.title|linebreaks }}
-                <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
-            </h5>
+    {% for post in owner_page.object_list %}
+    <div class="col mb-4">
+        <div class="card" style="width: 33.7rem;">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
             {% endif %}
-            <p class="text-justify">{{ post.text|linebreaks }}</p>
-            <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark" role="button">Edit</a>
-                <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger" role="button">Х</a></p>
-            <div class="card-footer">
-                <h6 align="right">Author: {{ post.owner }}</h6>
-                <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
-                <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
+            <div class="card-body">
                 {% if post.public %}
-                <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
+                <h5>{{ post.title|linebreaks }}
+                    <a href="{% url 'blogs:privat_public' post.id %}"
+                       class="badge badge-success">Public</a></h5>
+                {% else %}
+                <h5>
+                    {{ post.title|linebreaks }}
+                    <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
+                </h5>
                 {% endif %}
+                {% if post.text|length > 50 %}
+                <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
+                {% else %}
+                <p class="text-justify">{{ post.text|linebreaks }}</p>
+                {% endif %}
+                <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
+                      role="button">Read</a></p>
+                <div class="card-footer">
+                    <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark" role="button">Edit</a>
+                        <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
+                           role="button">Х</a></p>
+                    <div class="card-footer">
+                        <h6 align="right">Author: {{ post.owner }}</h6>
+                        <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
+                        <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
+                        {% if post.public %}
+                        <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-{% empty %}
-No posts have been added yet.
-{% endfor %}
-</div>
-
-{% if owner_posts|length > 10 %}
-<nav aria-label="...">
-    <ul class="pagination">
-        <li class="page-item {% if not prev_owner_page_url %} disabled {% endif %}">
-            <a class="page-link" href="{{ prev_owner_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-
-        {% for n in owner_page.paginator.page_range %}
-        {% if owner_page.number == n %}
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
-        </li>
-        {% elif n > owner_page.number|add:-3 and n < owner_page.number|add:3 %}
-        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
-        {% endif %}
+        {% empty %}
+        No posts have been added yet.
         {% endfor %}
+    </div>
 
-        <li class="page-item {% if not next_owner_page_url %} disabled {% endif %}">
-            <a class="page-link" href="{{ next_owner_page_url }}">Next</a>
-        </li>
-    </ul>
-</nav>
-{% endif %}
-{% endblock content %}
+    {% if owner_posts|length > 10 %}
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item {% if not prev_owner_page_url %} disabled {% endif %}">
+                <a class="page-link" href="{{ prev_owner_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+
+            {% for n in owner_page.paginator.page_range %}
+            {% if owner_page.number == n %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
+            </li>
+            {% elif n > owner_page.number|add:-3 and n < owner_page.number|add:3 %}
+            <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            <li class="page-item {% if not next_owner_page_url %} disabled {% endif %}">
+                <a class="page-link" href="{{ next_owner_page_url }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+    {% endblock content %}
