@@ -1,18 +1,18 @@
 {% extends "blogs/base.html" %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block header %}
-  <h2>Register your account.</h2>
+<h2>Register your account.</h2>
 {% endblock header %}
 
 {% block content %}
-  <form method="post" action="{% url 'users:register' %}" class="form">
+<form method="post" action="{% url 'users:register' %}" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
-      <button name="submit" class="btn btn-primary">register</button>
+    <button name="submit" class="btn btn-dark btn-block">register</button>
     {% endbuttons %}
 
-    <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
-  </form>
+    <input type="hidden" name="next" value="{% url 'blogs:index' %}"/>
+</form>
 {% endblock content %}
