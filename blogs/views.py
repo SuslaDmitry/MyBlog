@@ -36,7 +36,7 @@ def owner_posts(request):
 def public_posts(request):
     """Выводит список публичных тем на главной странице"""
     public_posts = BlogPost.objects.filter(public=True).order_by('-date_added')
-    paginator = Paginator(public_posts, 10)
+    paginator = Paginator(public_posts, 12)
     page_number = request.GET.get('page', 1)
     public_page = paginator.get_page(page_number)
 

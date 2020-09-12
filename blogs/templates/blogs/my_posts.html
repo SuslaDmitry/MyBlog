@@ -26,11 +26,7 @@
                     <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
                 </h5>
                 {% endif %}
-                {% if post.text|length > 50 %}
-                <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
-                {% else %}
                 <p class="text-justify">{{ post.text|linebreaks }}</p>
-                {% endif %}
                 <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
                       role="button">Read</a></p>
                 <div class="card-footer">
