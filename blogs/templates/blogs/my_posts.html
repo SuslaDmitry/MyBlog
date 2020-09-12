@@ -41,10 +41,9 @@
             </div>
         </div>
     </div>
-</div>
-{% empty %}
-No posts have been added yet.
-{% endfor %}
+    {% empty %}
+    No posts have been added yet.
+    {% endfor %}
 </div>
 
 {% if owner_posts|length > 10 %}
