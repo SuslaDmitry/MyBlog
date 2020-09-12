@@ -33,7 +33,7 @@
                        role="button">Х</a></p>
                 <div class="card-footer">
                     <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
-                    <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
+                    <br><small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small></br>
                     {% if post.public %}
                     <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
                     {% endif %}
