@@ -6,8 +6,9 @@
 {% endblock header %}
 
 {% block content %}
-
-<h4 align="center">Add a new post</h4>
+<div class="p-2">
+    <h4 align="center">Add a new post</h4>
+</div>
 
 <form action="{% url 'blogs:new_post' %}" class="form" enctype="multipart/form-data"
       method='post'>

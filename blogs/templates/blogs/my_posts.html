@@ -1,58 +1,59 @@
 {% extends "blogs/base.html" %}
 {% load bootstrap4 %}
 {% block header %}
-<h2 align="center">My Posts</h2>
+<div class="pt-2">
+    <h2 align="center">My Posts</h2>
+</div>
 {% endblock header %}
 
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-2">
+<div class="card-group">
     {% for post in owner_page.object_list %}
-    <div class="col-b-6">
-        <div class="col-lg-6">
-            <div class="card">
-                {% if post.image %}
-                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+    <div class="col-md-6 p-2">
+        <div class="card">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+                {% if post.public %}
+                <h5>{{ post.title|linebreaks }}
+                    <a href="{% url 'blogs:privat_public' post.id %}"
+                       class="badge badge-success">Public</a></h5>
+                {% else %}
+                <h5>
+                    {{ post.title|linebreaks }}
+                    <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
+                </h5>
                 {% endif %}
-                <div class="card-body">
-                    {% if post.public %}
-                    <h5>{{ post.title|linebreaks }}
-                        <a href="{% url 'blogs:privat_public' post.id %}"
-                           class="badge badge-success">Public</a></h5>
-                    {% else %}
-                    <h5>
-                        {{ post.title|linebreaks }}
-                        <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
-                    </h5>
-                    {% endif %}
-                    {% if post.text|length > 50 %}
-                    <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
-                    {% else %}
-                    <p class="text-justify">{{ post.text|linebreaks }}</p>
-                    {% endif %}
-                    <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
-                          role="button">Read</a></p>
+                {% if post.text|length > 50 %}
+                <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
+                {% else %}
+                <p class="text-justify">{{ post.text|linebreaks }}</p>
+                {% endif %}
+                <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
+                      role="button">Read</a></p>
+                <div class="card-footer">
+                    <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark"
+                          role="button">Edit</a>
+                        <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
+                           role="button">Х</a></p>
                     <div class="card-footer">
-                        <p><a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark"
-                              role="button">Edit</a>
-                            <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
-                               role="button">Х</a></p>
-                        <div class="card-footer">
-                            <h6 align="right">Author: {{ post.owner }}</h6>
-                            <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
-                            <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
-                            {% if post.public %}
-                            <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
-                            {% endif %}
-                        </div>
+                        <h6 align="right">Author: {{ post.owner }}</h6>
+                        <small class="text-muted">Create: {{ post.date_added|date:'M d, Y H:i' }}</small>
+                        <small class="text-muted">Edit: {{ post.date_edit|date:'M d, Y H:i' }}</small>
+                        {% if post.public %}
+                        <small class="text-muted">Published: {{ post.date_publication|date:'M d, Y H:i' }}</small>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% empty %}
-    No posts have been added yet.
-    {% endfor %}
+</div>
+{% empty %}
+No posts have been added yet.
+{% endfor %}
 </div>
 
 {% if owner_posts|length > 10 %}
