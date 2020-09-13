@@ -132,13 +132,13 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Мои настройки
 LOGIN_URL = '/users/login/'
 
 # Настройки django-bootstrap3
-BOOTSTRAP4 = {
+BOOTSTRAP3 = {
 'include_jquery': True,
 }
 
