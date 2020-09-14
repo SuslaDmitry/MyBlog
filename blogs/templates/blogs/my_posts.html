@@ -26,8 +26,8 @@
                     <a href="{% url 'blogs:privat_public' post.id %}" class="badge badge-dark">Private</a>
                 </h5>
                 {% endif %}
-                {% if post.text|length > 250 %}
-                <p class="text-justify">{{ post.text|truncatechars:250 }}</p>
+                {% if post.text|length > 300 %}
+                <p class="text-justify">{{ post.text|truncatechars:300 }}</p>
                 {% else %}
                 <p class="text-justify">{{ post.text|linebreaks }}</p>
                 {% endif %}
@@ -41,12 +41,13 @@
                     none
                     {% endfor %}
                 </div>
-                <p>
-                    <a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark" role="button">Edit</a>
-                    <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger" role="button">Х</a>
-                    <a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
-                       role="button">Read</a>
-                </p>
+                <p><a href="{% url 'blogs:post_details' post.id %}" class="btn btn-outline-dark btn-block"
+                      role="button">Read</a></p>
+                <a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-outline-dark" role="button">Edit</a>
+                <div class="float-right">
+                    <a href="{% url 'blogs:delete_post' post.id %}" class="btn btn-outline-danger"
+                       role="button">Delete</a>
+                </div>
 
                 <div class="card-footer">
                     <h6 align="right">Author: {{ post.owner }}</h6>

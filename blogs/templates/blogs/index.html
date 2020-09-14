@@ -19,8 +19,8 @@
             {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ post.title|linebreaks }}</h5>
-                {% if post.text|length > 400 %}
-                <p class="text-justify">{{ post.text|truncatechars:400 }}</p>
+                {% if post.text|length > 500 %}
+                <p class="text-justify">{{ post.text|truncatechars:500 }}</p>
                 {% else %}
                 <p class="text-justify">{{ post.text|linebreaks }}</p>
                 {% endif %}
