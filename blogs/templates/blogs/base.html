@@ -36,19 +36,20 @@
                         <a href="{% url 'blogs:new_post' %}" class="btn btn-outline-light" role="button">Add Post</a>
                     </li>
                 </div>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Tags</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <div class="pl-2">
-                            <a href="{% url 'blogs:new_tag' %}" class="btn btn-outline-dark" role="button">Add/Delete
-                                Tag</a>
+                <div class="pl-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Tags</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <div class="pl-2">
+                                <a href="{% url 'blogs:new_tag' %}" class="btn btn-outline-dark" role="button">Add/Delete
+                                    Tag</a>
+                            </div>
+                            {% for tag in tags %}
+                            <a class="dropdown-item" href="{% url 'blogs:tag_detail' tag.id %}">{{ tag.title }}</a>
+                            {% endfor %}
                         </div>
-                        {% for tag in tags %}
-                        <a class="dropdown-item" href="{% url 'blogs:tag_detail' tag.id %}">{{ tag.title }}</a>
-                        {% endfor %}
-
-                    </div>
+                </div>
                 </li>
                 {% endif %}
             </ul>
