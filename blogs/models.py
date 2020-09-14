@@ -12,9 +12,17 @@ class BlogPost(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     public = models.BooleanField(default=False)
     date_publication = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
 
     def __str__(self):
         return self.title + ":\n" + self.text
 
     class Meta:
         ordering = ['-date_added']
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50)
+
+    def __str__(self):
+        return '{}'.format(self.title)

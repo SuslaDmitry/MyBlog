@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -29,6 +30,17 @@ urlpatterns = [
     # Публикация/приватизация поста
     url(r'^privat_public/(?P<post_id>\d+)/$', views.privat_public,
         name='privat_public'),
+
+    # Страница для добавления нового tag
+    url(r'^new_tag/$', views.new_tag,
+        name='new_tag'),
+
+    # Введет все посты, прикрепленные к этому тегу
+    url(r'^tag_detail/(?P<tag_id>\d+)/$', views.tag_detail, name='tag_detail'),
+
+    # Удаление поста
+    url(r'^delete_tag/(?P<tag_id>\d+)/$', views.delete_tag,
+        name='delete_tag'),
 
 ]
 app_name = 'blogs'

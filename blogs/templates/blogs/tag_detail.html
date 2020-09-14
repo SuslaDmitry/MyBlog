@@ -1,17 +1,16 @@
 {% extends "blogs/base.html" %}
-{% load bootstrap4 %}
+
 {% block header %}
 
 <div class="pt-2">
-    <h2 align="center">Public Posts</h2>
+    <h2 align="center">Posts with tag <b>{{ tag.title }}</b></h2>
 </div>
+
 {% endblock header %}
 
 {% block content %}
-
 <div class="card-group">
-    {% for post in public_page.object_list %}
-
+    {% for post in tag_page.object_list %}
     <div class="col-md-6 p-2">
         <div class="card">
             {% if post.image %}
@@ -27,7 +26,7 @@
                 <div class="pb-3">
                     Tags:
                     {% for tag in post.tags.all %}
-                    <a href="{{ tag.get_absolute_url }}">
+                    <a href="{% url 'blogs:tag_detail' tag.id %}">
                         #{{ tag.title }}
                     </a>
                     {% empty %}
@@ -44,34 +43,34 @@
                 </div>
             </div>
         </div>
-
     </div>
     {% empty %}
-    No posts have been added yet.
+    There are no posts in this category.
     {% endfor %}
 </div>
 
-{% if public_posts|length > 10 %}
-<nav aria-label="Search results pages">
+{% if tag_posts|length > 10 %}
+<nav aria-label="...">
     <ul class="pagination">
-        <li class="page-item {% if not prev_public_page_url %} disabled {% endif %}">
-            <a class="page-link" href="{{ prev_public_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item {% if not prev_tag_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_tag_page_url }}" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
 
-        {% for n in public_page.paginator.page_range %}
-        {% if public_page.number == n %}
+        {% for n in tag_page.paginator.page_range %}
+        {% if tag_page.number == n %}
         <li class="page-item active" aria-current="page">
             <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
         </li>
-        {% elif n > public_page.number|add:-3 and n < public_page.number|add:3 %}
+        {% elif n > tag_page.number|add:-3 and n < tag_page.number|add:3 %}
         <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
         {% endif %}
         {% endfor %}
 
-        <li class="page-item {% if not next_public_page_url %} disabled {% endif %}">
-            <a class="page-link" href="{{ next_public_page_url }}">Next</a>
+        <li class="page-item {% if not next_tag_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_tag_page_url }}">Next</a>
         </li>
     </ul>
 </nav>
 {% endif %}
-{% endblock content %}
+
+{% endblock %}

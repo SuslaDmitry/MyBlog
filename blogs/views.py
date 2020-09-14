@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from .models import BlogPost
-from .forms import BlogPostForm
+from .models import BlogPost, Tag
+from .forms import BlogPostForm, TagForm
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponseNotFound
 import datetime
 
 
@@ -13,7 +13,7 @@ import datetime
 def owner_posts(request):
     """Страница My posts приложения Blog выводит список постов владельца"""
     owner_posts = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
-    paginator = Paginator(owner_posts, 10)
+    paginator = Paginator(owner_posts, 12)
     page_number = request.GET.get('page', 1)
     owner_page = paginator.get_page(page_number)
 
@@ -64,11 +64,12 @@ def new_post(request):
         form = BlogPostForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = BlogPostForm(request.POST, request.FILES)
+        form = BlogPostForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.owner = request.user
             new_post.save()
+            form.save_m2m()
             if new_post.public:
                 return HttpResponseRedirect(reverse('blogs:index'))
             else:
@@ -134,3 +135,51 @@ def privat_public(request, post_id):
         return HttpResponseRedirect(reverse('blogs:index'))
     else:
         return HttpResponseRedirect(reverse('blogs:owner_posts'))
+
+
+def tag_detail(request, tag_id):
+    """Выводит список постов по заданому тегу"""
+    tag = get_object_or_404(Tag, id=tag_id)
+    tag_posts = tag.posts.all()
+    paginator = Paginator(tag_posts, 10)
+    page_number = request.GET.get('page', 1)
+    tag_page = paginator.get_page(page_number)
+
+    if tag_page.has_next():
+        next_url = f'?page={tag_page.next_page_number()}'
+    else:
+        next_url = ''
+    if tag_page.has_previous():
+        prev_url = f'?page={tag_page.previous_page_number()}'
+    else:
+        prev_url = ''
+
+    context = {'tag': tag,
+               'tag_page': tag_page,
+               'tag_posts': tag_posts,
+               'next_tag_page_url': next_url,
+               'prev_tag_page_url': prev_url}
+    return render(request, 'blogs/tag_detail.html', context)
+
+
+@login_required
+def new_tag(request):
+    """Добавляет новый пост."""
+    if request.method != 'POST':
+        # Данные не отправлялись; создается пустая форма.
+        form = TagForm()
+    else:
+        # Отправлены данные POST; обработать данные.
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogs:new_tag'))
+    context = {'form': form}
+    return render(request, 'blogs/new_tag.html', context)
+
+
+@login_required
+def delete_tag(request, tag_id):
+    tag = get_object_or_404(Tag, id=tag_id)
+    tag.delete()
+    return HttpResponseRedirect(reverse('blogs:new_tag'))
