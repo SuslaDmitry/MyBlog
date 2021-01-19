@@ -133,6 +133,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Мои настройки
 LOGIN_URL = '/users/login/'
 
+# Настройки Heroku
+import django_heroku
+django_heroku.settings(locals())
+
+
 # Настройки django-bootstrap3
 BOOTSTRAP3 = {
     'include_jquery': True,
