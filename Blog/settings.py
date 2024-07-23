@@ -24,6 +24,8 @@ DATABASE_URL = "postgresql://postgres:cpfYYRsxhrPStJSmfHxMwYyDBjfdYyUo@viaduct.p
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+CSRF_TRUSTED_ORIGINS = ['https://web-production-9689e.up.railway.app']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
