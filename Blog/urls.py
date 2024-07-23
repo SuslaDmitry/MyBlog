@@ -19,12 +19,12 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from django.urls import re_path as url
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'', include('blogs.urls', namespace='blogs')),
-    url(r'^users/', include('users.urls', namespace='users')),
+    re_path(r'', include('blogs.urls', namespace='blogs')),
+    re_path(r'^users/', include('users.urls', namespace='users')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
