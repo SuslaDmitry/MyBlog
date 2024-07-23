@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': 'DB',
         'USER': 'user',
         'PASSWORD': 'qwerty123',
-        'HOST': 'localhost',
+        'HOST': 'viaduct.proxy.rlwy.net:16704',
         'PORT': '5432',
     }
 }
