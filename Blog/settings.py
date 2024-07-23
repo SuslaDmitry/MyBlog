@@ -30,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['35.232.162.0',
 #                  'ukraineblog.tk']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web-production-9689e.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
