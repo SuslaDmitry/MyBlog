@@ -4,7 +4,7 @@ beautifulsoup4==4.12.3
 bootstrap4==0.1.0
 distlib==0.3.8
 dj-static==0.0.6
-Django==5.0.7
+Django==3.1.1
 django-bootstrap3==24.2
 django-bootstrap4==24.3
 django-taggit==5.0.1

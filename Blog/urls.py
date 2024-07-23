@@ -22,8 +22,8 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'', include('blogs.urls', namespace='blogs')),
-    re_path(r'^users/', include('users.urls', namespace='users')),
+    url(r'', include('blogs.urls', namespace='blogs')),
+    url(r'^users/', include('users.urls', namespace='users')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
